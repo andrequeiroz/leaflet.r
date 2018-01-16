@@ -353,7 +353,7 @@ library(htmlwidgets)</code></pre>
 <h2>Mapa Interativo</h2>
 <p>O mapa interativo será gerado a parir do encadeamento de funções seguinte.</p>
 <pre class="r"><code>dados %&gt;%
-    leaflet(options = leafletOptions(zoom = 10, minZoom = 6, maxZoom = 10)) %&gt;%
+    leaflet(options = leafletOptions(minZoom = 6, maxZoom = 10)) %&gt;%
     addProviderTiles(provider = &quot;Esri.WorldTopoMap&quot;) %&gt;%
     addPolygons(color = &quot;black&quot;, weight = 1, opacity = 0.6,
                 fillColor = ~paleta(valor),
@@ -368,6 +368,12 @@ library(htmlwidgets)</code></pre>
 <div style="text-align:center">
 <p><iframe seamless src="mapa.html" width="800" height="500"></iframe></p>
 </div>
+<p>Para adicionar a visualização em uma página utilize:</p>
+
+<div style="text-align:center">
+  <iframe seamless src="mapa.html" width="800" height="500"></iframe>
+</div>
+
 </section>
 
 

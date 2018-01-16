@@ -79,7 +79,7 @@ O mapa interativo será gerado a parir do encadeamento de funções seguinte.
 
 ```{r, eval = FALSE}
 dados %>%
-    leaflet(options = leafletOptions(zoom = 10, minZoom = 6, maxZoom = 10)) %>%
+    leaflet(options = leafletOptions(minZoom = 6, maxZoom = 10)) %>%
     addProviderTiles(provider = "Esri.WorldTopoMap") %>%
     addPolygons(color = "black", weight = 1, opacity = 0.6,
                 fillColor = ~paleta(valor),
@@ -96,3 +96,13 @@ dados %>%
 <div style="text-align:center">
   <iframe seamless src="mapa.html" width="800" height="500"></iframe>
 </div>
+
+Para adicionar a visualização em uma página utilize:
+
+```{r echo=FALSE}
+knitr::asis_output(htmltools::htmlPreserve('
+<div style="text-align:center">
+  <iframe seamless src="mapa.html" width="800" height="500"></iframe>
+</div>
+'))
+```
