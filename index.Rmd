@@ -99,10 +99,8 @@ dados %>%
 
 Para adicionar a visualização em uma página utilize:
 
-```{r echo=FALSE}
-knitr::asis_output(htmltools::htmlPreserve('
-<div style="text-align:center">
-  <iframe seamless src="mapa.html" width="800" height="500"></iframe>
-</div>
-'))
-```
+<pre>
+&lt;div style="text-align:center"&gt;
+  &lt;iframe seamless src="mapa.html" width="800" height="500"&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</pre>
