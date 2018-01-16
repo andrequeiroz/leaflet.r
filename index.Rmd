@@ -23,10 +23,9 @@ library(htmlwidgets)
 
 ## Malha Digital
 
-A malha digital utilizada está disponível no diretório [malha](./malha).
-O carregamento no R será feito a partir da função `readOGR()` da biblioteca
+A malha digital utilizada está disponível no diretório [malha](https://github.com/andrequeiroz/leaflet.r/tree/master/malha). O
+carregamento no R será feito a partir da função `readOGR()` da biblioteca
 `rgdal`.
-
 
 ```{r, eval = FALSE}
 malha <- readOGR(dsn = "./malha", layer = "trt3")
@@ -34,9 +33,10 @@ malha <- readOGR(dsn = "./malha", layer = "trt3")
 
 ## Estatística
 
-A [base](./dados/base) de dados utilizada é fictícia. Foram gerados valores
-aleatórios para cada um dos municípios-sede da malha digital. O carregamento no
-R será feito a partir da função `read_tsv()` da biblioteca `readr`.
+A [base](https://github.com/andrequeiroz/leaflet.r/blob/master/dados/base) de
+dados utilizada é fictícia. Foram gerados valores aleatórios para cada um dos
+municípios-sede da malha digital. O carregamento no R será feito a partir da
+função `read_tsv()` da biblioteca `readr`.
 
 ```{r, eval = FALSE}
 dados <- read_tsv("./dados/base")
@@ -44,7 +44,9 @@ dados <- read_tsv("./dados/base")
 
 ## Malha Digital + Estatística
 
-A união dos dados à malha digital será feita a partir da função `merge()` da biblioteca `base`. A chave da união é dada pelos campos `cd_geocmu` da malha digital e `codigo_ibge` da base de dados.
+A união dos dados à malha digital será feita a partir da função `merge()` da
+biblioteca `base`. A chave da união é dada pelos campos `cd_geocmu` da malha
+digital e `codigo_ibge` da base de dados.
 
 ```{r, eval = FALSE}
 dados <- malha %>%
@@ -53,7 +55,8 @@ dados <- malha %>%
 
 ## Rótulos
 
-Os rótulos que irão aparecer no mapa ao passar o *mouse* sobre o polígono da região será formatado em HTML a partir do encadeamento seguinte de funções:
+Os rótulos que irão aparecer no mapa ao passar o *mouse* sobre o polígono da
+região será formatado em HTML a partir do encadeamento seguinte de funções:
 
 ```{r, eval = FALSE}
 rotulos <- sprintf("<strong>%s</strong><br/>Estatística: %s", dados$nm_municip,
@@ -63,7 +66,8 @@ rotulos <- sprintf("<strong>%s</strong><br/>Estatística: %s", dados$nm_municip,
 
 ## Paleta de Cores
 
-A paleta de cores que será utilizada é criada a partir da função `colorNumeric()` da biblioteca `leaflet`.
+A paleta de cores que será utilizada é criada a partir da função
+`colorNumeric()` da biblioteca `leaflet`.
 
 ```{r, eval = FALSE}
 paleta <- colorNumeric("RdYlBu", domain = dados$valor)

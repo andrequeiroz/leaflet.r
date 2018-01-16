@@ -323,12 +323,12 @@ library(readr)
 library(htmlwidgets)</code></pre>
 <section id="malha-digital" class="level2">
 <h2>Malha Digital</h2>
-<p>A malha digital utilizada está disponível no diretório <a href="./malha">malha</a>. O carregamento no R será feito a partir da função <code>readOGR()</code> da biblioteca <code>rgdal</code>.</p>
+<p>A malha digital utilizada está disponível no diretório <a href="https://github.com/andrequeiroz/leaflet.r/tree/master/malha">malha</a>. O carregamento no R será feito a partir da função <code>readOGR()</code> da biblioteca <code>rgdal</code>.</p>
 <pre class="r"><code>malha &lt;- readOGR(dsn = &quot;./malha&quot;, layer = &quot;trt3&quot;)</code></pre>
 </section>
 <section id="estatistica" class="level2">
 <h2>Estatística</h2>
-<p>A <a href="./dados/base">base</a> de dados utilizada é fictícia. Foram gerados valores aleatórios para cada um dos municípios-sede da malha digital. O carregamento no R será feito a partir da função <code>read_tsv()</code> da biblioteca <code>readr</code>.</p>
+<p>A <a href="https://github.com/andrequeiroz/leaflet.r/blob/master/dados/base">base</a> de dados utilizada é fictícia. Foram gerados valores aleatórios para cada um dos municípios-sede da malha digital. O carregamento no R será feito a partir da função <code>read_tsv()</code> da biblioteca <code>readr</code>.</p>
 <pre class="r"><code>dados &lt;- read_tsv(&quot;./dados/base&quot;)</code></pre>
 </section>
 <section id="malha-digital-estatistica" class="level2">
