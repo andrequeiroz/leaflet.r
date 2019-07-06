@@ -255,9 +255,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -276,25 +274,98 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -304,8 +375,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Leaflet + R</h1>
-<h4 class="author"><em>André Queiroz</em></h4>
-<h4 class="date"><em>15 de janeiro de 2018</em></h4>
+<h4 class="author">André Queiroz</h4>
+<h4 class="date">15 de janeiro de 2018</h4>
 
 </div>
 
@@ -321,35 +392,35 @@ $(document).ready(function () {
 library(rgdal)
 library(readr)
 library(htmlwidgets)</code></pre>
-<section id="malha-digital" class="level2">
+<div id="malha-digital" class="section level2">
 <h2>Malha Digital</h2>
 <p>A malha digital utilizada está disponível no diretório <a href="https://github.com/andrequeiroz/leaflet.r/tree/master/malha">malha</a>. O carregamento no R será feito a partir da função <code>readOGR()</code> da biblioteca <code>rgdal</code>.</p>
 <pre class="r"><code>malha &lt;- readOGR(dsn = &quot;./malha&quot;, layer = &quot;trt3&quot;)</code></pre>
-</section>
-<section id="estatistica" class="level2">
+</div>
+<div id="estatistica" class="section level2">
 <h2>Estatística</h2>
 <p>A <a href="https://github.com/andrequeiroz/leaflet.r/blob/master/dados/base">base</a> de dados utilizada é fictícia. Foram gerados valores aleatórios para cada um dos municípios-sede da malha digital. O carregamento no R será feito a partir da função <code>read_tsv()</code> da biblioteca <code>readr</code>.</p>
 <pre class="r"><code>dados &lt;- read_tsv(&quot;./dados/base&quot;)</code></pre>
-</section>
-<section id="malha-digital-estatistica" class="level2">
+</div>
+<div id="malha-digital-estatistica" class="section level2">
 <h2>Malha Digital + Estatística</h2>
 <p>A união dos dados à malha digital será feita a partir da função <code>merge()</code> da biblioteca <code>base</code>. A chave da união é dada pelos campos <code>cd_geocmu</code> da malha digital e <code>codigo_ibge</code> da base de dados.</p>
 <pre class="r"><code>dados &lt;- malha %&gt;%
     merge(dados, by.x = &quot;cd_geocmu&quot;, by.y = &quot;codigo_ibge&quot;)</code></pre>
-</section>
-<section id="rotulos" class="level2">
+</div>
+<div id="rotulos" class="section level2">
 <h2>Rótulos</h2>
 <p>Os rótulos que irão aparecer no mapa ao passar o <em>mouse</em> sobre o polígono da região será formatado em HTML a partir do encadeamento seguinte de funções:</p>
 <pre class="r"><code>rotulos &lt;- sprintf(&quot;&lt;strong&gt;%s&lt;/strong&gt;&lt;br/&gt;Estatística: %s&quot;, dados$nm_municip,
                    format(dados$valor, big.mark = &quot;.&quot;, decimal.mark = &quot;,&quot;)) %&gt;%
     lapply(htmltools::HTML)</code></pre>
-</section>
-<section id="paleta-de-cores" class="level2">
+</div>
+<div id="paleta-de-cores" class="section level2">
 <h2>Paleta de Cores</h2>
 <p>A paleta de cores que será utilizada é criada a partir da função <code>colorNumeric()</code> da biblioteca <code>leaflet</code>.</p>
 <pre class="r"><code>paleta &lt;- colorNumeric(&quot;RdYlBu&quot;, domain = dados$valor)</code></pre>
-</section>
-<section id="mapa-interativo" class="level2">
+</div>
+<div id="mapa-interativo" class="section level2">
 <h2>Mapa Interativo</h2>
 <p>O mapa interativo será gerado a parir do encadeamento de funções seguinte.</p>
 <pre class="r"><code>dados %&gt;%
@@ -374,7 +445,7 @@ library(htmlwidgets)</code></pre>
   &lt;iframe seamless src=&quot;mapa.html&quot; width=&quot;800&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;
 &lt;/div&gt;
 </pre>
-</section>
+</div>
 
 
 
