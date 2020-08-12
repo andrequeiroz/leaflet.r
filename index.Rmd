@@ -75,7 +75,7 @@ paleta <- colorNumeric("RdYlBu", domain = dados$valor)
 
 ## Mapa Interativo
 
-O mapa interativo será gerado a parir do encadeamento de funções seguinte.
+O mapa interativo será gerado a partir do encadeamento de funções seguinte.
 
 ```{r, eval = FALSE}
 dados %>%
