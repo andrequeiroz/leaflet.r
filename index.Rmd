@@ -2,7 +2,9 @@
 title: "Leaflet + R"
 author: André Queiroz
 date: 15 de janeiro de 2018
-output: html_document
+output:
+  html_document:
+    self_contained: false
 ---
 
 Exemplo de mapa interativo com [Leaflet](http://leafletjs.com) e
